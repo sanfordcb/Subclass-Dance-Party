@@ -1,14 +1,21 @@
 // Creates and returns a new dancer object that can step
 var Dancer = function(top, left, timeBetweenSteps){
 
-  // use jQuery to create an HTML <span> tag
+  // Use jQuery to create and style a generic dancer <span>.
   this.$node = $('<span class="dancer"></span>');
+  this.setColor('white');
+  this.setPosition(top, left);
+  
+  //Make the Dancer dance
+  this.setDance();
   this.timeBetweenSteps = timeBetweenSteps;
   this.step();
-
-  // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
-  // this one sets the position to some random default point within the body
-  this.setPosition(top, left);
+};
+/*
+  STYLING 
+*/
+Dancer.prototype.setColor = function(color) {
+  this.$node.css({'border': '10px solid ' + color, 'border-radius': '10px'});
 };
 
 Dancer.prototype.setPosition = function(top, left){
@@ -22,8 +29,23 @@ Dancer.prototype.setPosition = function(top, left){
   this.$node.css(styleSettings);
 };
 
+/*
+  DANCE MOVES and STEPPING
+*/
+Dancer.prototype.setDance = function(callback) {
+  this.dance = callback || this.$node.toggle;
+};
+
 Dancer.prototype.step = function(){
   // the basic dancer doesn't do anything interesting at all on each step,
   // it just schedules the next step
+  this.dance.call(this.$node);
   setTimeout(this.step.bind(this), this.timeBetweenSteps);
+};
+
+/*
+  SUBCLASS FUNCTIONS
+*/
+Dancer.prototype.setClass = function(className) {
+  this.$node.addClass(className);
 };

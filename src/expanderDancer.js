@@ -1,6 +1,7 @@
 var ExpanderDancer = function (top, left, timeBetweenSteps) {
   Dancer.call(this, top, left, timeBetweenSteps);
-  this.$node = $("<span class='expander-dancer'></span>");
+  this.setClass('expander-dancer');
+  this.setColor('blue');
 };
 
 ExpanderDancer.prototype = Object.create(Dancer.prototype);

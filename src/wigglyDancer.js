@@ -1,6 +1,7 @@
 var WigglyDancer = function (top, left, timeBetweenSteps) {
   Dancer.call(this, top, left, timeBetweenSteps);
-  this.$node = $('<span class="wiggly-dancer"></span>');
+  this.setClass('wiggly-dancer');
+  this.setColor('yellow');
 };
 
 WigglyDancer.prototype = Object.create(Dancer.prototype);
