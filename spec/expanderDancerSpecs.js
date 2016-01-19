@@ -5,7 +5,7 @@ describe('expanderDancer', function() {
 
   beforeEach(function() {
     clock = sinon.useFakeTimers();
-    expanderDancer = new expanderDancer(10, 20, timeBetweenSteps);
+    expanderDancer = new ExpanderDancer(10, 20, timeBetweenSteps);
   });
 
   it('should have a jQuery $node object and node should have class expander-dancer', function() {

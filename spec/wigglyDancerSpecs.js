@@ -5,7 +5,7 @@ describe('wigglyDancer', function() {
 
   beforeEach(function() {
     clock = sinon.useFakeTimers();
-    wigglyDancer = new wigglyDancer(10, 20, timeBetweenSteps);
+    wigglyDancer = new WigglyDancer(10, 20, timeBetweenSteps);
   });
   
   it('check if wigglyDancer has a node with class \'wiggly-dancer\'', function() {

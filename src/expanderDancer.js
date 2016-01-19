@@ -1,6 +1,6 @@
 var ExpanderDancer = function (top, left, timeBetweenSteps) {
   Dancer.call(this, top, left, timeBetweenSteps);
-  this.$node = $("<span class="wiggly-dancer"></span>");
+  this.$node = $("<span class='expander-dancer'></span>");
 };
 
 ExpanderDancer.prototype = Object.create(Dancer.prototype);
