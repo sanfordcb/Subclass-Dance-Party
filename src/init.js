@@ -22,14 +22,33 @@ $(document).ready(function(){
 
     // make a dancer with a random position
 
-    var dancer = new dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
-      Math.random() * 1000
-    );
+    var top = ($("body").height() - 10) * Math.random();
+    var left = ($("body").width() - 10) * Math.random();
+    var isBlinkyNeighbor = false;
+
+    if(window.dancers.length) {
+      isBlinkyNeighbor = window.dancers.reduce(function(accumulator, dancer) {
+        if(dancer instanceof BlinkyDancer) {
+          var dancerTop = parseInt(dancer.$node.css('top'));
+          var dancerLeft = parseInt(dancer.$node.css('left'));
+          var distance = Math.sqrt((top - dancerTop)^2 + (left - dancerLeft)^2);
+          return accumulator || distance < 5;
+        } else {
+          return accumulator || false;
+      }
+      }, false);
+    }
+    var dancer = new dancerMakerFunction(top, left, Math.random() * 1000, isBlinkyNeighbor);
 
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
+      
   });
 
+  $('#lineUp').on('click', function() {
+    dancers.forEach(function(dancer) {
+      dancer.$node.css('left', '10px');
+    });
+  }); 
+  var positions = [];
 });

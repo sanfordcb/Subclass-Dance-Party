@@ -1,21 +1,30 @@
 // Creates and returns a new dancer object that can step
-var Dancer = function(top, left, timeBetweenSteps){
+var Dancer = function(top, left, timeBetweenSteps, isBlinkyNeighbor){
 
   // Use jQuery to create and style a generic dancer <span>.
   this.$node = $('<span class="dancer"></span>');
   this.setColor('white');
+  this.setSize();
   this.setPosition(top, left);
+  this.isBlinkyNeighbor = isBlinkyNeighbor;
   
   //Make the Dancer dance
   this.setDance();
   this.timeBetweenSteps = timeBetweenSteps;
   this.step();
+  this.$node.mouseover(this.stop.bind(this));
 };
 /*
   STYLING 
 */
 Dancer.prototype.setColor = function(color) {
-  this.$node.css({'border': '10px solid ' + color, 'border-radius': '10px'});
+  this.$node.css({'border': '10px solid ' + color, 'border-radius': '50%', 'background-color': color});
+};
+
+Dancer.prototype.setSize = function(height, width) {
+  height = height || '0px';
+  width = width || '0px';
+  this.$node.css({'height': height, 'width': width});
 };
 
 Dancer.prototype.setPosition = function(top, left){
@@ -43,9 +52,20 @@ Dancer.prototype.step = function(){
   setTimeout(this.step.bind(this), this.timeBetweenSteps);
 };
 
+Dancer.prototype.stop = function() {
+  var oldDance = this.dance;
+  this.setDance(function() {});
+  return oldDance; 
+}
+
 /*
   SUBCLASS FUNCTIONS
 */
 Dancer.prototype.setClass = function(className) {
   this.$node.addClass(className);
 };
+
+Dancer.prototype.blink = function() {
+    this.$node.toggle();
+};
+
